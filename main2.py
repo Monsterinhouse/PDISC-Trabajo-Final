@@ -1,32 +1,30 @@
 # Imports
-from cgitb import text
-from distutils.command.upload import upload
-from fileinput import filename
-from struct import pack
-from textwrap import fill
 from tkinter import *
-from tkinter import filedialog
 from tkinter import ttk
-from turtle import bgcolor, title
+from tkinter import filedialog
 from PIL import Image, ImageTk
 import tkinter as TTK
 
 # Window Config
 root = TTK.Tk()
 root.title("Adaptador de Imagenes Web")
+root.config(bg='black')
 
 # TitleFrame
 titleframe = Frame(root)
 titleframe.config(bg="black", bd=3)
-titleLabel = ttk.Label(titleframe, text="Adaptador de Imagenes Web", font=("Fixedsys", 20))
-titleLabel.config(background='black', foreground='white')
-titleLabel.grid(column=0, row=1, columnspan=6, padx=100)
+titleLabel1 = ttk.Label(titleframe, text="Adaptador de", font=("Fixedsys", 18))
+titleLabel1.config(background='black', foreground='white')
+titleLabel1.grid(column=0, row=1)
+titleLabel2 = ttk.Label(titleframe, text="Imagenes Web", font=("Fixedsys", 18))
+titleLabel2.config(background='black', foreground='white')
+titleLabel2.grid(column=0, row=2)
 titleframe.grid()
 
 # UploadFrame
 uploadframe = Frame(root)
 uploadframe.config(bg="blue", bd=3)
-uploadframe.grid(column=0, row=2, columnspan=3, rowspan=3, sticky=W)
+uploadframe.grid(column=0, row=3, rowspan=2)
 
 # Procesos
 def uploadImage () :
@@ -37,19 +35,24 @@ def uploadImage () :
     res_file = og_foto.resize((300, 200))
     img = ImageTk.PhotoImage(res_file)
     img_button = ttk.Button(uploadframe,image=img) # using Button 
-    img_button.grid(column=0, row=2, padx=20, pady=20)
+    img_button.grid(column=0, row=4, padx=20, pady=20)
     gen_button = ttk.Button(uploadframe, text="Generar Resultados", command=lambda:results(), width=45)
-    gen_button.grid(column=0, row=4, padx=10, pady=10, columnspan=3)
+    gen_button.grid(column=0, row=6, padx=10, pady=10, columnspan=3)
 
 def results() :
     # Result Frame
     resframe = Frame(root)
-    resframe.config(bg="red", bd=3)
-    resframe.grid(column=1, row=2, columnspan=3, rowspan=3, sticky=E)
+    resframe.config(bg="red", bd=3, width=200)
+    res_label = Label (resframe, text="Resultado", font=('Impact', 15))
+    res_img = ttk.Button(resframe, image=img)
+    res_label.config(bg="red", fg='white')
+    res_label.grid (column=1, row=5)
+    res_img.grid(column=1, row=4, padx=20, pady=20)
+    resframe.grid(column=1, row=1, columnspan=3, rowspan=3)
 
 # Componentes/Elementos
 addButton = ttk.Button(uploadframe, text="Añadir Imagen", command=lambda:uploadImage(), width=45)
 
-addButton.grid(column=0, row=3, padx=10, pady=20, columnspan=3)
+addButton.grid(column=0, row=5, padx=10, pady=20, columnspan=3)
 
 root.mainloop()
